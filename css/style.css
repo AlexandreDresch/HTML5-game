@@ -77,7 +77,12 @@ body {
  	margin-top:100px;
 	text-align:center;
 	padding:10px;
-
+}
+#shot {
+	width: 50px;
+	height: 8px;
+	position: absolute;
+	background-image: url(../imgs/shot.png);
 }
 
 .anima1 {
