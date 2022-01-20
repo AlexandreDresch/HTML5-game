@@ -165,6 +165,19 @@ body {
     to { background-position: -528px; }
 }
 
+#explosion1 {
+	width:15px;
+	height:87px;
+	position:absolute;
+}
+
+#explosion2 {
+	width:15px;
+	height:87px;
+	position:absolute;
+
+}
+
 
 
 
