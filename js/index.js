@@ -51,12 +51,12 @@ function start() {
 		collision();
 		score1();
 		energy();
-	}
+	};
 
 	function backgroundMove() {
 		left = parseInt($('#gameBackground').css('background-position'));
 		$('#gameBackground').css('background-position', left -1);
-	}
+	};
 
 	function playerMove() {
 		if(game.pressed[KEY.W]) {
@@ -65,22 +65,22 @@ function start() {
 
 			if(top <= 0) {
 				$('#player').css('top', top +10);
-			}
+			};
 
-		}
+		};
 		if(game.pressed[KEY.S]) {
 			var top = parseInt($('#player').css('top'));
 			$('#player').css('top', top +10);
 			
 			if(top >= 434) {
 				$('#player').css('top', top -10);
-			}
+			};
 
-		}
+		};
 		if(game.pressed[KEY.D]) {
 			shoot();
-		}
-	}
+		};
+	};
 
 	function enemy1Move() {
 		positionX = parseInt($('#enemy1').css('left'));
@@ -91,8 +91,8 @@ function start() {
 			positionY = parseInt(Math.random() * 334);
 			$('#enemy1').css('left', 694);
 			$('#enemy1').css('top', positionY);
-		}
-	}
+		};
+	};
 
 	function enemy2Move() {
 		positionX = parseInt($('#enemy2').css('left'));
@@ -100,8 +100,8 @@ function start() {
 
 		if(positionX <= 0) {
 			$('#enemy2').css('left', 775);
-		}
-	}
+		};
+	};
 
 	function friendMove() {
 		positionX = parseInt($('#friend').css('left'));
@@ -109,8 +109,8 @@ function start() {
 
 		if(positionX > 906) {
 			$('#friend').css('left', 0);
-		}
-	}
+		};
+	};
 
 	function shoot() {
 	
@@ -127,7 +127,7 @@ function start() {
 			$("#shot").css("left", shotX);
 		
 		var shotTime = window.setInterval(startShot, 30);
-		}
+		};
 
 		function startShot() {
 			positionX = parseInt($("#shot").css("left"));
@@ -138,9 +138,9 @@ function start() {
 					shotTime = null;
 					$("#shot").remove();
 					canShoot = true;
-				}
-		}
-	}
+				};
+		};
+	};
 
 	function collision() {
 		var collision1 = ($("#player").collision($("#enemy1")));
@@ -160,7 +160,7 @@ function start() {
 			positionY = parseInt(Math.random() * 334);
 			$("#enemy1").css("left", 694);
 			$("#enemy1").css("top", positionY);
-		}
+		};
 
 		if (collision2.length > 0) {
 	
@@ -172,7 +172,7 @@ function start() {
 			$("#enemy2").remove();
 				
 			enemyReposition2();
-		}	
+		};	
 
 		if (collision3.length > 0) {
 			
@@ -188,7 +188,7 @@ function start() {
 			$("#enemy1").css("left", 694);
 			$("#enemy1").css("top", positionY);
 				
-		}
+		};
 
 		if (collision4.length > 0) {
 		
@@ -202,7 +202,7 @@ function start() {
 			$("#shot").css("left", 950);
 			
 			enemyReposition2();		
-		}
+		};
 		
 		if (collision5.length > 0) {
 			
@@ -210,7 +210,7 @@ function start() {
 			saved++;
 			friendReposition();
 			$("#friend").remove();
-		}
+		};
 
 		if (collision6.length > 0) {
 	    
@@ -221,9 +221,9 @@ function start() {
 			$("#friend").remove();
 					
 			friendReposition();
-		}
+		};
 	
-	}
+	};
 
 	function explosion1(enemy1X, enemy1Y) {
 		explosionSound.play();
@@ -242,9 +242,9 @@ function start() {
 				window.clearInterval(explosionTime);
 				explosionTime=null;
 				
-			}
+			};
 			
-		}
+		};
 	
 	function enemyReposition2() {
 
@@ -258,10 +258,10 @@ function start() {
 				
 				$("#gameBackground").append("<div id=enemy2></div");
 				
-				}
+				};
 				
-			}	
-	}	
+			};	
+	};
 	
 	function explosion2(enemy2X, enemy2Y) {
 		explosionSound.play();
@@ -280,9 +280,9 @@ function start() {
 				window.clearInterval(explosionTime2);
 				explosionTime = null;
 				
-			}
+			};
 			
-	}
+	};
 
 	function friendReposition() {
 	
@@ -296,10 +296,10 @@ function start() {
 			
 			$("#gameBackground").append("<div id='friend' class='anima3'></div>");
 			
-			}
+			};
 			
-		}
-	}
+		};
+	};
 
 	function explosion3(friendX,friendY) {
 		lostSound.play();
@@ -311,37 +311,61 @@ function start() {
 		$("#explosion3").remove();
 		window.clearInterval(explosionTime3);
 		explosionTime3 = null;
-		}
+		};
 		
-	}
+	};
 
 	function score1() {
 	$("#score").html("<h2> Score: " + count + " Saved: " + saved + " Lost: " + lost + "</h2>");
-	}
+	};
 
 	function energy() {
 	
 		if (currentEnergy == 3) {
 			
 			$("#energy").css("background-image", "url(imgs/energy3.png)");
-		}
+		};
 	
 		if (currentEnergy == 2) {
 			
 			$("#energy").css("background-image", "url(imgs/energy2.png)");
-		}
+		};
 	
 		if (currentEnergy == 1) {
 			
 			$("#energy").css("background-image", "url(imgs/energy1.png)");
-		}
+		};
 	
 		if (currentEnergy == 0) {
 			
 			$("#energy").css("background-image", "url(imgs/energy0.png)");
 			
-			//Game Over
-		}
+			gameOver1();
+		};
 	
-	}
-}
+	};
+
+	function gameOver1() {
+		gameOver=true;
+		music.pause();
+		gameOverSound.play();
+		
+		window.clearInterval(game.timer);
+		game.timer=null;
+		
+		$("#player").remove();
+		$("#enemy1").remove();
+		$("#enemy2").remove();
+		$("#friend").remove();
+		
+		$("#gameBackground").append("<div id='end'></div>");
+		
+		$("#end").html("<h1> Game Over </h1><p>Your SCORE: " + count + "</p>" + "<div id='reboot' onClick=rebootGame()><h3>Try Again</h3></div>");
+	};
+};
+
+function rebootGame() {
+	gameOverSound.pause();
+	$("#end").remove();
+	start();
+};
